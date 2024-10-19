@@ -2,20 +2,26 @@ library circle_stepper;
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+
+enum FillDirection {
+  clockwise,
+  counterClockwise,
+}
 
 class CircleStepper extends StatefulWidget {
-  final int step; // Current step value
-  final int totalSteps; // Total number of steps
-  final String betweenStepText; // Total number of steps
-  final Map<int, String> stepTitles; // Map of step number to title
-  final Map<int, String> stepDescriptions; // Map of step number to description
-  final Color progressColor; // Color of the progress bar
+  final int step;
+  final int totalSteps;
+  final String betweenStepText;
+  final Map<int, String> stepTitles;
+  final Map<int, String> stepDescriptions;
+  final Color progressColor;
   final Color backgroundColor;
-  final String fontFamily = 'Poppins';
-  final Color colorTextStepper = Colors.black;
-  final Color colorTitle = Colors.black;
-  final Color colorDescriptions = Colors.grey;
-  final TextDirection direction;
+  final String fontFamily;
+  final Color colorTextStepper;
+  final Color colorTitle;
+  final Color colorDescriptions;
+  final FillDirection fillDirection; // New property
 
   const CircleStepper({
     Key? key,
@@ -26,7 +32,11 @@ class CircleStepper extends StatefulWidget {
     required this.stepDescriptions,
     required this.progressColor,
     required this.backgroundColor,
-    required this.direction,
+    this.fontFamily = 'Poppins',
+    this.colorTextStepper = Colors.black,
+    this.colorTitle = Colors.black,
+    this.colorDescriptions = Colors.grey,
+    this.fillDirection = FillDirection.clockwise, // Default is clockwise
   }) : super(key: key);
 
   @override
@@ -34,21 +44,19 @@ class CircleStepper extends StatefulWidget {
 }
 
 class _CircleStepperState extends State<CircleStepper> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController; // Controller for animation
-  late Animation<double> _progressAnimation; // Animation for progress value
-  double _previousProgress = 0.0; // Track the previous progress
+  late AnimationController _animationController;
+  late Animation<double> _progressAnimation;
+  double _previousProgress = 0.0;
 
   @override
   void initState() {
     super.initState();
 
-    // Initialize the animation controller
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800), // Duration of animation
+      duration: const Duration(milliseconds: 800),
     );
 
-    // Initialize the progress animation with the current step value
     _progressAnimation = Tween<double>(
       begin: _previousProgress,
       end: widget.step / widget.totalSteps,
@@ -57,7 +65,6 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
       curve: Curves.easeInOut,
     ));
 
-    // Start the animation
     _animationController.forward();
   }
 
@@ -65,25 +72,22 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   void didUpdateWidget(covariant CircleStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Calculate the new progress based on the step and total steps
     double newProgress = widget.step / widget.totalSteps;
 
-    // Update the animation to transition from the current to the new progress
     _progressAnimation = Tween<double>(
-      begin: _progressAnimation.value, // Start from current progress
-      end: newProgress, // End at new progress
+      begin: _progressAnimation.value,
+      end: newProgress,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
 
-    // Restart the animation from the current position
     _animationController.forward(from: 0);
   }
 
   @override
   void dispose() {
-    _animationController.dispose(); // Dispose of the animation controller
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -104,11 +108,18 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
                   child: AnimatedBuilder(
                     animation: _progressAnimation,
                     builder: (context, child) {
-                      return CircularProgressIndicator(
-                        color: widget.progressColor,
-                        backgroundColor: widget.backgroundColor,
-                        value: _progressAnimation.value, // Animated progress value
-                        strokeWidth: 6,
+                      // Apply a transform based on the selected direction
+                      return Transform(
+                        transform: widget.fillDirection == FillDirection.clockwise
+                            ? Matrix4.identity() // No transformation for clockwise
+                            : Matrix4.rotationY(3.14159), // Rotate 180 degrees for counter-clockwise
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(
+                          color: widget.progressColor,
+                          backgroundColor: widget.backgroundColor,
+                          value: _progressAnimation.value,
+                          strokeWidth: 6,
+                        ),
                       );
                     },
                   ),
@@ -116,7 +127,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
               ),
               Positioned(
                 child: Text(
-                  '${widget.step} ${widget.betweenStepText} ${widget.totalSteps}', // Dynamic step text
+                  '${widget.step} ${widget.betweenStepText} ${widget.totalSteps}',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * .03,
                     fontWeight: FontWeight.w500,
@@ -129,13 +140,13 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
           ),
           const SizedBox(width: 18),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * .061,
+            height: MediaQuery.of(context).size.height * .061,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  widget.stepTitles[widget.step] ?? '', // Dynamic title based on step
+                  widget.stepTitles[widget.step] ?? '',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * .034,
                     fontWeight: FontWeight.w600,
@@ -145,7 +156,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  widget.stepDescriptions[widget.step] ?? '', // Dynamic description based on step
+                  widget.stepDescriptions[widget.step] ?? '',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * .029,
                     fontWeight: FontWeight.w400,

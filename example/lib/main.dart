@@ -22,28 +22,25 @@ class MyApp extends StatelessWidget {
           child: Container(
             height: 300,
             margin: EdgeInsets.symmetric(horizontal: 16),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: CircleStepper(
-                direction: TextDirection.ltr,
-                step: 1,
-                totalSteps: 4,
-                betweenStepText: 'از',
-                stepTitles: const {
-                  1: 'Step 1',
-                  2: 'Step 2',
-                  3: 'Step 3',
-                  4: 'Step 4',
-                },
-                stepDescriptions: const {
-                  1: 'Description 1',
-                  2: 'Description 2',
-                  3: 'Description 3',
-                  4: 'Description 4',
-                },
-                progressColor: Colors.amber,
-                backgroundColor: Colors.grey.withAlpha(100),
-              ),
+            child: CircleStepper(
+              fillDirection: FillDirection.clockwise,
+              step: 1,
+              totalSteps: 4,
+              betweenStepText: 'of',
+              stepTitles: const {
+                1: 'Step 1',
+                2: 'Step 2',
+                3: 'Step 3',
+                4: 'Step 4',
+              },
+              stepDescriptions: const {
+                1: 'Description 1',
+                2: 'Description 2',
+                3: 'Description 3',
+                4: 'Description 4',
+              },
+              progressColor: Colors.amber,
+              backgroundColor: Colors.grey.withAlpha(100),
             ),
           ),
         ),
