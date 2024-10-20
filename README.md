@@ -29,7 +29,7 @@ TODO: Include short and useful examples for package users. Add longer examples
 to `/example` folder.
 
 ```dart
-CircleStepper(
+                  CircleStepper(
                       fillDirection: FillDirection.clockwise,
                       step: step,
                       totalSteps: totalSteps,
@@ -48,7 +48,7 @@ CircleStepper(
                       },
                       progressColor: Colors.greenAccent,
                       backgroundColor: Colors.grey.withAlpha(50),
-                    ),
+                  ),
 ```
 
 ## Additional information
