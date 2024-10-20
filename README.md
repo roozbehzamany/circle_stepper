@@ -1,4 +1,4 @@
-<!--
+![gift-card](https://github.com/user-attachments/assets/51fc566b-a45e-4aca-acd0-8ae4dacd71af)<!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
 
@@ -13,6 +13,15 @@ and the Flutter guide for
 
 CircleStepper
 A customizable, animated circular stepper widget for Flutter, designed to visualize progress across multiple steps. With customizable colors, titles, descriptions, and progress directions, CircleStepper adds a visually appealing and interactive element to your Flutter applications.
+
+
+
+
+
+https://github.com/user-attachments/assets/ce6a67ff-9cce-4b59-b11e-e7b2b381cb3a
+
+
+
 
 ## Features
 
