@@ -1,0 +1,5 @@
+
+enum FillDirection {
+  clockwise,
+  counterClockwise,
+}
