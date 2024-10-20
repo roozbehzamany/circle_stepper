@@ -29,7 +29,26 @@ TODO: Include short and useful examples for package users. Add longer examples
 to `/example` folder.
 
 ```dart
-const like = 'sample';
+CircleStepper(
+                      fillDirection: FillDirection.clockwise,
+                      step: step,
+                      totalSteps: totalSteps,
+                      betweenStepText: 'of',
+                      stepTitles: const {
+                        1: 'Step 1',
+                        2: 'Step 2',
+                        3: 'Step 3',
+                        4: 'Step 4',
+                      },
+                      stepDescriptions: const {
+                        1: 'Description 1',
+                        2: 'Description 2',
+                        3: 'Description 3',
+                        4: 'Description 4',
+                      },
+                      progressColor: Colors.greenAccent,
+                      backgroundColor: Colors.grey.withAlpha(50),
+                    ),
 ```
 
 ## Additional information
