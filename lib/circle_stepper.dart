@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'FilDirection.dart';
 
-
+import 'package:flutter/material.dart';
+import 'FilDirection.dart';
 
 class CircleStepper extends StatefulWidget {
   final double? width;
@@ -22,7 +23,7 @@ class CircleStepper extends StatefulWidget {
   final Color colorTextStepper;
   final Color colorTitle;
   final Color colorDescriptions;
-  final FillDirection fillDirection; // New property
+  final FillDirection fillDirection;
   final double? strokeWidth;
 
   const CircleStepper({
@@ -42,7 +43,7 @@ class CircleStepper extends StatefulWidget {
     this.colorTextStepper = Colors.black,
     this.colorTitle = Colors.black,
     this.colorDescriptions = Colors.grey,
-    this.fillDirection = FillDirection.clockwise, // Default is clockwise
+    this.fillDirection = FillDirection.clockwise,
     this.strokeWidth,
   }) : super(key: key);
 
@@ -59,37 +60,40 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   void initState() {
     super.initState();
 
+    _initializeAnimation();
+  }
+
+  void _initializeAnimation() {
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
 
-    _progressAnimation = Tween<double>(
-      begin: _previousProgress,
-      end: widget.step / widget.totalSteps,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-
+    _setAnimationProgress(widget.step / widget.totalSteps);
     _animationController.forward();
   }
 
-  @override
-  void didUpdateWidget(covariant CircleStepper oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    double newProgress = widget.step / widget.totalSteps;
-
+  void _setAnimationProgress(double newProgress) {
     _progressAnimation = Tween<double>(
-      begin: _progressAnimation.value,
+      begin: _previousProgress,
       end: newProgress,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
 
-    _animationController.forward(from: 0);
+    _previousProgress = newProgress;
+  }
+
+  @override
+  void didUpdateWidget(covariant CircleStepper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.step != oldWidget.step || widget.totalSteps != oldWidget.totalSteps) {
+      double newProgress = widget.step / widget.totalSteps;
+      _setAnimationProgress(newProgress);
+      _animationController.forward(from: 0);
+    }
   }
 
   @override
@@ -100,81 +104,92 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
+    final double width = widget.width ?? MediaQuery.sizeOf(context).height * .061;
+    final double height = widget.height ?? MediaQuery.sizeOf(context).height * .061;
+
     return SizedBox(
-      height: widget.height ?? MediaQuery.sizeOf(context).height * .061,
+      height: height,
       child: Row(
         children: [
           Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
-                width: widget.width ?? MediaQuery.sizeOf(context).height * .061,
-                height: widget.height ?? MediaQuery.sizeOf(context).height * .061,
-                child: RotatedBox(
-                  quarterTurns: 90,
-                  child: AnimatedBuilder(
-                    animation: _progressAnimation,
-                    builder: (context, child) {
-                      // Apply a transform based on the selected direction
-                      return Transform(
-                        transform: widget.fillDirection == FillDirection.clockwise
-                            ? Matrix4.identity() // No transformation for clockwise
-                            : Matrix4.rotationY(3.14159), // Rotate 180 degrees for counter-clockwise
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(
-                          color: widget.progressColor,
-                          backgroundColor: widget.backgroundColor,
-                          value: _progressAnimation.value,
-                          strokeWidth: widget.strokeWidth ?? 6,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Positioned(
-                child: Text(
-                  '${widget.step} ${widget.betweenStepText} ${widget.totalSteps}',
-                  style: widget.textStyleStepper ??
-                      TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * .03,
-                        fontWeight: FontWeight.w500,
-                        color: widget.colorTextStepper,
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-              ),
+              _buildCircularProgressIndicator(width, height),
+              _buildProgressText(context),
             ],
           ),
           const SizedBox(width: 18),
-          SizedBox(
-            height: widget.height ?? MediaQuery.of(context).size.height * .061,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  widget.stepTitles[widget.step] ?? '',
-                  style: widget.textStyleTitle ??
-                      TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * .034,
-                        fontWeight: FontWeight.w600,
-                        color: widget.colorTitle,
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  widget.stepDescriptions[widget.step] ?? '',
-                  style: widget.textStyleDescriptions ??
-                      TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * .029,
-                        fontWeight: FontWeight.w400,
-                        color: widget.colorDescriptions,
-                        fontFamily: 'Poppins',
-                      ),
-                ),
-              ],
+          _buildStepInfo(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCircularProgressIndicator(double width, double height) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: RotatedBox(
+        quarterTurns: 90,
+        child: AnimatedBuilder(
+          animation: _progressAnimation,
+          builder: (context, child) {
+            return Transform(
+              transform: widget.fillDirection == FillDirection.clockwise
+                  ? Matrix4.identity()
+                  : Matrix4.rotationY(3.14159),
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(
+                color: widget.progressColor,
+                backgroundColor: widget.backgroundColor,
+                value: _progressAnimation.value,
+                strokeWidth: widget.strokeWidth ?? 6,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProgressText(BuildContext context) {
+    return Positioned(
+      child: Text(
+        '${widget.step} ${widget.betweenStepText} ${widget.totalSteps}',
+        style: widget.textStyleStepper ?? TextStyle(
+          fontSize: MediaQuery.of(context).size.width * .03,
+          fontWeight: FontWeight.w500,
+          color: widget.colorTextStepper,
+          fontFamily: 'Poppins',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStepInfo(BuildContext context) {
+    return SizedBox(
+      height: widget.height ?? MediaQuery.of(context).size.height * .061,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            widget.stepTitles[widget.step] ?? '',
+            style: widget.textStyleTitle ?? TextStyle(
+              fontSize: MediaQuery.of(context).size.width * .034,
+              fontWeight: FontWeight.w600,
+              color: widget.colorTitle,
+              fontFamily: 'Poppins',
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            widget.stepDescriptions[widget.step] ?? '',
+            style: widget.textStyleDescriptions ?? TextStyle(
+              fontSize: MediaQuery.of(context).size.width * .029,
+              fontWeight: FontWeight.w400,
+              color: widget.colorDescriptions,
+              fontFamily: 'Poppins',
             ),
           ),
         ],
