@@ -1,4 +1,4 @@
-![Demo-ios](https://github.com/user-attachments/assets/42c3e36a-ec94-4946-b790-7b5fe72c29c3)<!--
+<!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
 
