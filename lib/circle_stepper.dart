@@ -1,5 +1,6 @@
 library circle_stepper;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'FilDirection.dart';
@@ -112,10 +113,14 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
             alignment: Alignment.center,
             children: [
               _buildCircularProgressIndicator(width, height),
-              _buildProgressText(context),
+              SizedBox(
+                width: width - 20,
+                height: height,
+                child: _buildProgressText(context),
+              ),
             ],
           ),
-          const SizedBox(width: 18),
+          SizedBox(width: MediaQuery.sizeOf(context).width * .03),
           _buildStepInfo(context),
         ],
       ),
@@ -132,9 +137,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
           animation: _progressAnimation,
           builder: (context, child) {
             return Transform(
-              transform: widget.fillDirection == FillDirection.clockwise
-                  ? Matrix4.identity()
-                  : Matrix4.rotationY(3.14159),
+              transform: widget.fillDirection == FillDirection.clockwise ? Matrix4.identity() : Matrix4.rotationY(3.14159),
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 color: widget.progressColor,
@@ -150,15 +153,17 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   }
 
   Widget _buildProgressText(BuildContext context) {
-    return Positioned(
+    return FittedBox(
+      fit: BoxFit.scaleDown,
       child: Text(
         '${widget.step} ${widget.betweenStepText} ${widget.totalSteps}',
-        style: widget.textStyleStepper ?? TextStyle(
-          fontSize: MediaQuery.of(context).size.width * .03,
-          fontWeight: FontWeight.w500,
-          color: widget.colorTextStepper,
-          fontFamily: 'Poppins',
-        ),
+        style: widget.textStyleStepper ??
+            TextStyle(
+              fontSize: MediaQuery.of(context).size.width * .03,
+              fontWeight: FontWeight.w500,
+              color: widget.colorTextStepper,
+              fontFamily: 'Poppins',
+            ),
       ),
     );
   }
@@ -166,30 +171,35 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   Widget _buildStepInfo(BuildContext context) {
     return SizedBox(
       height: widget.height ?? MediaQuery.of(context).size.height * .061,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            widget.stepTitles[widget.step] ?? '',
-            style: widget.textStyleTitle ?? TextStyle(
-              fontSize: MediaQuery.of(context).size.width * .034,
-              fontWeight: FontWeight.w600,
-              color: widget.colorTitle,
-              fontFamily: 'Poppins',
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              widget.stepTitles[widget.step] ?? '',
+              style: widget.textStyleTitle ??
+                  TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * .034,
+                    fontWeight: FontWeight.w600,
+                    color: widget.colorTitle,
+                    fontFamily: 'Poppins',
+                  ),
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            widget.stepDescriptions[widget.step] ?? '',
-            style: widget.textStyleDescriptions ?? TextStyle(
-              fontSize: MediaQuery.of(context).size.width * .029,
-              fontWeight: FontWeight.w400,
-              color: widget.colorDescriptions,
-              fontFamily: 'Poppins',
+            SizedBox(height: MediaQuery.of(context).size.height * .01),
+            Text(
+              widget.stepDescriptions[widget.step] ?? '',
+              style: widget.textStyleDescriptions ??
+                  TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * .029,
+                    fontWeight: FontWeight.w400,
+                    color: widget.colorDescriptions,
+                    fontFamily: 'Poppins',
+                  ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
