@@ -143,7 +143,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
                 color: widget.progressColor,
                 backgroundColor: widget.backgroundColor,
                 value: _progressAnimation.value,
-                strokeWidth: widget.strokeWidth ?? 6,
+                strokeWidth: widget.strokeWidth ?? (width / height) * 5,
               ),
             );
           },
