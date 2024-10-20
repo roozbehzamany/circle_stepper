@@ -61,6 +61,6 @@ flutter:
 
     - family: Poppins
       fonts:
-        - asset: fonts/poppins/PoppinsLatin-Regular.ttf
+        - asset: fonts/PoppinsLatin-Regular.ttf
           style: normal
           weight: 400

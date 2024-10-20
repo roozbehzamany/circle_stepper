@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'FilDirection.dart';
 
-import 'package:flutter/material.dart';
-import 'FilDirection.dart';
-
 class CircleStepper extends StatefulWidget {
   final double? width;
   final double? height;
