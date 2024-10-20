@@ -39,7 +39,7 @@ flutter pub get
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
+Include short and useful examples for package users. Add longer examples
 to `/example` folder.
 
 Here is a simple example of how to use the CircleStepper widget:
