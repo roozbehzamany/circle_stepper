@@ -14,11 +14,9 @@ and the Flutter guide for
 CircleStepper
 A customizable, animated circular stepper widget for Flutter, designed to visualize progress across multiple steps. With customizable colors, titles, descriptions, and progress directions, CircleStepper adds a visually appealing and interactive element to your Flutter applications.
 
+## Web
+![Demo_web](https://github.com/user-attachments/assets/6035c264-7e7e-435c-8af3-2352d960f336)
 
-
-
-
-https://github.com/user-attachments/assets/ce6a67ff-9cce-4b59-b11e-e7b2b381cb3a
 
 
 https://github.com/user-attachments/assets/98539762-1dda-4daa-86cb-a3a161b1beaf
