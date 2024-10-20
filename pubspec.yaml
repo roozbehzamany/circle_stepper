@@ -1,6 +1,6 @@
 name: circle_stepper
 description: "Best circle stepper for flutter"
-version: 1.0.1
+version: 1.0.3
 homepage: 'https://github.com/roozbehzamany/circle_stepper'
 
 environment:
