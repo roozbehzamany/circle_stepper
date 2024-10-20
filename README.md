@@ -44,6 +44,7 @@ to `/example` folder.
 
 Here is a simple example of how to use the CircleStepper widget:
 
+```dart
     CircleStepper(
         fillDirection: FillDirection.clockwise,
         step: step,
@@ -65,6 +66,7 @@ Here is a simple example of how to use the CircleStepper widget:
         backgroundColor: Colors.grey.withAlpha(50),
     ),
 
+```
 ## Parameters:
 
 | Parameter            | Type         | Description                                                                                 |
@@ -132,7 +134,7 @@ CircleStepper(
 
 
 ## Additional information
-Additional Information
+
 * For issues, feedback, or contributions, check out our GitHub repository.
 * You can submit issues or feature requests via the issue tracker.
 * Contributions are welcome! Fork the repository and create a pull request.
