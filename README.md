@@ -43,7 +43,7 @@ Installation
 Add circle_stepper to your project's pubspec.yaml dependencies:
 ```dart
 dependencies:
-  circle_stepper: ^1.0.1
+  circle_stepper: ^1.0.3
 
 ```
 Then, run:
