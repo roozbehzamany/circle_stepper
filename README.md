@@ -22,6 +22,11 @@ A customizable, animated circular stepper widget for Flutter, designed to visual
 <img src=https://github.com/user-attachments/assets/002c571b-50b6-4a94-8daf-90ee662f8c88  height="500">
 
 
+## Ios
+
+<img src=https://github.com/user-attachments/assets/d9f80b0b-60f1-40aa-a622-bd53b778d245  height="500">
+
+
 
 ## Features
 
