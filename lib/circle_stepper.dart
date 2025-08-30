@@ -140,6 +140,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
               transform: widget.fillDirection == FillDirection.clockwise ? Matrix4.identity() : Matrix4.rotationY(3.14159),
               alignment: Alignment.center,
               child: CircularProgressIndicator(
+                strokeCap: StrokeCap.round,
                 color: widget.progressColor,
                 backgroundColor: widget.backgroundColor,
                 value: _progressAnimation.value,

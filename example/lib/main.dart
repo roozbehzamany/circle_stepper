@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'ImageSlider.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -19,7 +19,8 @@ class _MyAppState extends State<MyApp> {
   int step = 1;
 
   final int totalSteps = 4;
- // Total steps for the slider
+
+  // Total steps for the slider
   void _increaseStep() {
     setState(() {
       if (step < totalSteps) {
@@ -114,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                     Colors.blue,
                     Colors.pink,
                   ],
-                  step: step-1,
+                  step: step - 1,
                 ),
               ),
               Row(
