@@ -43,7 +43,7 @@ Installation
 Add circle_stepper to your project's pubspec.yaml dependencies:
 ```dart
 dependencies:
-  circle_stepper: ^1.2.0
+  circle_stepper: ^1.3.0
 
 ```
 Then, run:
@@ -78,30 +78,32 @@ Here is a simple example of how to use the CircleStepper widget:
         },
         progressColor: Colors.greenAccent,
         backgroundColor: Colors.grey.withAlpha(50),
+        fontFamily: 'Poppins',
     ),
 
 ```
 ## Parameters:
 
-| Parameter            | Type         | Description                                                                                 |
-|:---------------------|:-------------|:--------------------------------------------------------------------------------------------|
-| `width`              | `double?`    | Width of the circular stepper. If null, defaults to a calculated height value.               |
-| `height`             | `double?`    | Height of the circular stepper. If null, defaults to a calculated width value.               |
-| `step`               | `int`        | The current step to display, must be between 1 and `totalSteps`.                             |
-| `totalSteps`         | `int`        | Total number of steps to be shown in the stepper.                                            |
-| `betweenStepText`    | `String`     | Text to display between the current step and the total steps.                                |
-| `stepTitles`         | `Map<int, String>` | A map of step titles corresponding to each step number.                                      |
-| `stepDescriptions`   | `Map<int, String>` | A map of step descriptions corresponding to each step number.                                |
-| `progressColor`      | `Color`      | Color for the progress fill in the circular stepper.                                         |
-| `backgroundColor`    | `Color`      | Background color for the circular progress bar.                                              |
-| `textStyleStepper`   | `TextStyle?` | Custom text style for the stepper text (e.g., "1 of 4").                                     |
-| `textStyleTitle`     | `TextStyle?` | Custom text style for the step titles.                                                       |
-| `textStyleDescriptions` | `TextStyle?` | Custom text style for the step descriptions.                                                 |
-| `colorTextStepper`   | `Color`      | Color of the stepper text. Defaults to `Colors.black`.                                       |
-| `colorTitle`         | `Color`      | Color of the step titles. Defaults to `Colors.black`.                                        |
-| `colorDescriptions`  | `Color`      | Color of the step descriptions. Defaults to `Colors.grey`.                                   |
-| `fillDirection`      | `FillDirection` | Direction in which the circular progress fills (clockwise or counterclockwise).              |
-| `strokeWidth`        | `double?`    | Width of the progress circle stroke. Default is 6.                                           |
+| Parameter               | Type               | Description                                                                           |
+|:------------------------|:-------------------|:--------------------------------------------------------------------------------------|
+| `width`                 | `double?`          | Width of the circular stepper. If null, defaults to a calculated height value.        |
+| `height`                | `double?`          | Height of the circular stepper. If null, defaults to a calculated width value.        |
+| `step`                  | `int`              | The current step to display, must be between 1 and `totalSteps`.                      |
+| `totalSteps`            | `int`              | Total number of steps to be shown in the stepper.                                     |
+| `betweenStepText`       | `String`           | Text to display between the current step and the total steps.                         |
+| `stepTitles`            | `Map<int, String>` | A map of step titles corresponding to each step number.                               |
+| `stepDescriptions`      | `Map<int, String>` | A map of step descriptions corresponding to each step number.                         |
+| `progressColor`         | `Color`            | Color for the progress fill in the circular stepper.                                  |
+| `backgroundColor`       | `Color`            | Background color for the circular progress bar.                                       |
+| `textStyleStepper`      | `TextStyle?`       | Custom text style for the stepper text (e.g., "1 of 4").                              |
+| `textStyleTitle`        | `TextStyle?`       | Custom text style for the step titles.                                                |
+| `textStyleDescriptions` | `TextStyle?`       | Custom text style for the step descriptions.                                          |
+| `colorTextStepper`      | `Color`            | Color of the stepper text. Defaults to `Colors.black`.                                |
+| `colorTitle`            | `Color`            | Color of the step titles. Defaults to `Colors.black`.                                 |
+| `colorDescriptions`     | `Color`            | Color of the step descriptions. Defaults to `Colors.grey`.                            |
+| `fillDirection`         | `FillDirection`    | Direction in which the circular progress fills (clockwise or counterclockwise).       |
+| `strokeWidth`           | `double?`          | Width of the progress circle stroke. Default is 6.                                    |
+| `fontFamily`            | `String?`          | set font default 'Poppins'.                                                           |
 
 
 ## Advanced Usage
@@ -132,14 +134,17 @@ CircleStepper(
   textStyleStepper: const TextStyle(     // Custom text style for stepper text
     fontSize: 16,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Poppins',
   ),
   textStyleTitle: const TextStyle(       // Custom text style for title
     fontSize: 20,
     fontWeight: FontWeight.w600,
+    fontFamily: 'Poppins',
   ),
   textStyleDescriptions: const TextStyle(// Custom text style for description
     fontSize: 16,
     fontStyle: FontStyle.italic,
+    fontFamily: 'Poppins',
   ),
 )
 

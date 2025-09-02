@@ -23,6 +23,7 @@ class CircleStepper extends StatefulWidget {
   final Color colorDescriptions;
   final FillDirection fillDirection;
   final double? strokeWidth;
+  final String? fontFamily;
 
   const CircleStepper({
     Key? key,
@@ -43,6 +44,7 @@ class CircleStepper extends StatefulWidget {
     this.colorDescriptions = Colors.grey,
     this.fillDirection = FillDirection.clockwise,
     this.strokeWidth,
+    this.fontFamily,
   }) : super(key: key);
 
   @override
@@ -102,8 +104,9 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    final double width = widget.width ?? MediaQuery.sizeOf(context).height * .061;
-    final double height = widget.height ?? MediaQuery.sizeOf(context).height * .061;
+    final size = MediaQuery.sizeOf(context);
+    final double width = widget.width ?? size.height * .061;
+    final double height = widget.height ?? size.height * .061;
 
     return SizedBox(
       height: height,
@@ -120,7 +123,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
               ),
             ],
           ),
-          SizedBox(width: MediaQuery.sizeOf(context).width * .03),
+          SizedBox(width: size.width * .03),
           _buildStepInfo(context),
         ],
       ),
@@ -163,7 +166,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
               fontSize: MediaQuery.of(context).size.width * .03,
               fontWeight: FontWeight.w500,
               color: widget.colorTextStepper,
-              fontFamily: 'Poppins',
+              fontFamily: widget.fontFamily ?? 'Poppins',
             ),
       ),
     );
