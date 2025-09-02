@@ -1,9 +1,8 @@
 library circle_stepper;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'FilDirection.dart';
+import 'fill_direction.dart';
 
 /// A customizable and animated circular stepper widget.
 ///
@@ -73,7 +72,7 @@ class CircleStepper extends StatefulWidget {
 
   /// Creates a [CircleStepper].
   const CircleStepper({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     required this.step,
@@ -92,7 +91,7 @@ class CircleStepper extends StatefulWidget {
     this.fillDirection = FillDirection.clockwise,
     this.strokeWidth,
     this.fontFamily,
-  }) : super(key: key);
+  });
 
   @override
   State<CircleStepper> createState() => _CircleStepperState();

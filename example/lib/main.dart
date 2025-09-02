@@ -1,4 +1,4 @@
-import 'package:circle_stepper/FilDirection.dart';
+import 'package:circle_stepper/fill_direction.dart';
 import 'package:circle_stepper/circle_stepper.dart';
 import 'package:flutter/material.dart';
 
