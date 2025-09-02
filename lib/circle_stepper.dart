@@ -5,26 +5,73 @@ import 'package:flutter/material.dart';
 
 import 'FilDirection.dart';
 
+/// A customizable and animated circular stepper widget.
+///
+/// `CircleStepper` displays progress in a circular design with
+/// step numbers, titles, and descriptions. It is useful for
+/// onboarding flows, forms, quizzes, or any multi-step process.
 class CircleStepper extends StatefulWidget {
+  /// The width of the circular progress indicator.
   final double? width;
+
+  /// The height of the circular progress indicator.
   final double? height;
+
+  /// The current step index (must be between 1 and [totalSteps]).
   final int step;
+
+  /// The total number of steps.
   final int totalSteps;
+
+  /// The text displayed between the step and total steps.
+  ///
+  /// Example: "of", resulting in "2 of 5".
   final String betweenStepText;
+
+  /// A map of step indexes to titles.
+  ///
+  /// Example: `{1: "Step One", 2: "Step Two"}`.
   final Map<int, String> stepTitles;
+
+  /// A map of step indexes to descriptions.
+  ///
+  /// Example: `{1: "Introduction", 2: "Details"}`.
   final Map<int, String> stepDescriptions;
+
+  /// The color of the progress arc.
   final Color progressColor;
+
+  /// The background color of the circular progress track.
   final Color backgroundColor;
+
+  /// The text style used for the step indicator inside the circle.
   final TextStyle? textStyleStepper;
+
+  /// The text style used for step titles.
   final TextStyle? textStyleTitle;
+
+  /// The text style used for step descriptions.
   final TextStyle? textStyleDescriptions;
+
+  /// The color of the step text (inside the circle).
   final Color colorTextStepper;
+
+  /// The color of the step title text.
   final Color colorTitle;
+
+  /// The color of the step description text.
   final Color colorDescriptions;
+
+  /// The direction in which the progress is filled.
   final FillDirection fillDirection;
+
+  /// The stroke width of the circular progress indicator.
   final double? strokeWidth;
+
+  /// The font family applied to stepper texts.
   final String? fontFamily;
 
+  /// Creates a [CircleStepper].
   const CircleStepper({
     Key? key,
     this.width,
@@ -59,10 +106,10 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-
     _initializeAnimation();
   }
 
+  /// Initializes the animation controller and sets the initial progress.
   void _initializeAnimation() {
     _animationController = AnimationController(
       vsync: this,
@@ -73,14 +120,17 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
     _animationController.forward();
   }
 
+  /// Updates the animation progress with a new value.
   void _setAnimationProgress(double newProgress) {
     _progressAnimation = Tween<double>(
       begin: _previousProgress,
       end: newProgress,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     _previousProgress = newProgress;
   }
@@ -130,6 +180,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
     );
   }
 
+  /// Builds the circular progress indicator with animation.
   Widget _buildCircularProgressIndicator(double width, double height) {
     return SizedBox(
       width: width,
@@ -156,6 +207,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
     );
   }
 
+  /// Builds the text showing the current step out of total steps.
   Widget _buildProgressText(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
@@ -172,6 +224,7 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
     );
   }
 
+  /// Builds the step title and description section.
   Widget _buildStepInfo(BuildContext context) {
     return SizedBox(
       height: widget.height ?? MediaQuery.of(context).size.height * .061,
