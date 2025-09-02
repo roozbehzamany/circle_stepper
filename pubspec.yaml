@@ -1,8 +1,7 @@
 name: circle_stepper
 description: "A customizable and animated circular stepper widget for Flutter.
-Easily visualize progress through multiple steps in a clean, modern, and interactive circular design.
-With circle_stepper, you can guide users through onboarding, forms, surveys, or any multi-step flow using a smooth circular progress indicator that highlights the current step."
-version: 1.3.0
+Easily visualize progress through multiple steps in a clean, modern, and interactive circular design."
+version: 1.3.0+1
 homepage: 'https://github.com/roozbehzamany/circle_stepper'
 
 environment:

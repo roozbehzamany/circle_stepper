@@ -97,7 +97,8 @@ class CircleStepper extends StatefulWidget {
   State<CircleStepper> createState() => _CircleStepperState();
 }
 
-class _CircleStepperState extends State<CircleStepper> with SingleTickerProviderStateMixin {
+class _CircleStepperState extends State<CircleStepper>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _progressAnimation;
   double _previousProgress = 0.0;
@@ -138,7 +139,8 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
   void didUpdateWidget(covariant CircleStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.step != oldWidget.step || widget.totalSteps != oldWidget.totalSteps) {
+    if (widget.step != oldWidget.step ||
+        widget.totalSteps != oldWidget.totalSteps) {
       double newProgress = widget.step / widget.totalSteps;
       _setAnimationProgress(newProgress);
       _animationController.forward(from: 0);
@@ -190,7 +192,9 @@ class _CircleStepperState extends State<CircleStepper> with SingleTickerProvider
           animation: _progressAnimation,
           builder: (context, child) {
             return Transform(
-              transform: widget.fillDirection == FillDirection.clockwise ? Matrix4.identity() : Matrix4.rotationY(3.14159),
+              transform: widget.fillDirection == FillDirection.clockwise
+                  ? Matrix4.identity()
+                  : Matrix4.rotationY(3.14159),
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 strokeCap: StrokeCap.round,

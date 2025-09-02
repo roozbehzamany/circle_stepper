@@ -1,11 +1,17 @@
+## 1.3.0+1
+
+* fix some issues
+
 ## 1.3.0
+
 * add font family parameter
+
 ## 1.2.0
 
-* update flutter 
+* update flutter
 * update gradle
 * update kotlin
-* maka round progress indicator 
+* maka round progress indicator
 
 ## 1.0.4
 
