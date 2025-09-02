@@ -5,16 +5,16 @@ class ImageSlider extends StatefulWidget {
   final int step; // Step input to control the current page
 
   const ImageSlider({
-    Key? key,
+    super.key,
     required this.color,
     required this.step, // Required step input
-  }) : super(key: key);
+  });
 
   @override
-  _ImageSliderState createState() => _ImageSliderState();
+  ImageSliderState createState() => ImageSliderState();
 }
 
-class _ImageSliderState extends State<ImageSlider> {
+class ImageSliderState extends State<ImageSlider> {
   late PageController _pageController;
   int _currentPage = 0;
 

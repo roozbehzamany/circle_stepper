@@ -2,14 +2,14 @@ import 'package:circle_stepper/fill_direction.dart';
 import 'package:circle_stepper/circle_stepper.dart';
 import 'package:flutter/material.dart';
 
-import 'ImageSlider.dart';
+import 'image_slider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   Container(
                     height: 150,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
                     child: CircleStepper(
                       fillDirection: FillDirection.clockwise,
                       step: step,
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     height: 100,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: CircleStepper(
@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
               ),
               Center(
                 child: ImageSlider(
-                  color: [
+                  color: const [
                     Colors.red,
                     Colors.amber,
                     Colors.blue,
